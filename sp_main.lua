@@ -70,11 +70,7 @@ function setUniform(job, playerPed)
 				SetPedArmour(playerPed, 100)
 			end
 
-			if job == 'tenu_doag' then
-				SetPedArmour(playerPed, 100)
-			end
-
-			if job == 'tenu_sahpg' then
+			if job == 'tenu_swat' then
 				SetPedArmour(playerPed, 100)
 			end
 
@@ -101,31 +97,23 @@ function OpenCloakroomMenu()
 
 	local elements = {
 		{ label = _U('citizen_wear'), value = 'citizen_wear' },
-		{ label = 'Tenue De Police', value = 'tenu_lspd' },
-		{ label = 'Tenue De Police Armé', value = 'tenu_ma' },
-		--{ label = 'Tenue Hiver', value = 'tenu_hiv'},
-		--{ label = 'Tenue SWAT 1', value = 'tenu_swat'},
-		{ label = 'Tenue SWAT ', value = 'tenu_swatgr'},
-		--{ label = 'Tenue DOA', value = 'tenu_doag' },
-		--{ label = _U('bullet_wear'), value = 'bullet_wear' },
-	}
+		{ label = '--Tenue--'},
+		{ label = 'Tenue Cadet', value = 'recruit_wear' },
+		{ label = 'Tenue LSPD', value = 'officer_wear' },
+		{ label = 'Tenue Sergent', value = 'sergent_wear'},
+		{ label = 'Tenue Lieutenant', value = 'lieutenant_wear'},
+		{ label = 'Tenue Capitaine ', value = 'chef_wear'},
+		{ label = '--Spécial--'},
+		{ label = 'Tenue Commandant', value = 'boss_wear' },
+		{ label = 'Tenue K9', value = 'tenu_k9' },
+		{ label = 'Tenue Motard', value = 'tenu_mo'},
+		{ label = '--Swat--'},
+		{ label = 'Tenue Swat 1', value = 'tenu_swat' },
+		{ label = 'Tenue Swat 2', value = 'tenu_swatgr' },
+		{ label = '--Gilet Pare Balles--' },
+		{ label = _U('bullet_wear'), value = 'bullet_wear' },
+	  }
 
-	
-	if grade == 'recruit' then
-		table.insert(elements, {label = _U('police_wear'), value = 'recruit_wear'})
-	elseif grade == 'officer' or grade == 'sous-officier' or grade == 'Off-stup' then
-		table.insert(elements, {label = _U('police_wear'), value = 'officer_wear'})
-	elseif grade == 'sergeant' or grade == 'sergent-stup' then
-		table.insert(elements, {label = _U('police_wear'), value = 'sergeant_wear'})
-	elseif grade == 'intendent' then
-		table.insert(elements, {label = _U('police_wear'), value = 'intendent_wear'})
-	elseif grade == 'lieutenant' then
-		table.insert(elements, {label = _U('police_wear'), value = 'lieutenant_wear'})
-	elseif grade == 'chef' then
-		table.insert(elements, {label = _U('police_wear'), value = 'chef_wear'})
-	elseif grade == 'boss' then
-		table.insert(elements, {label = _U('police_wear'), value = 'boss_wear'})
-	end
 
 	ESX.UI.Menu.CloseAll()
 
@@ -232,19 +220,19 @@ function OpenCloakroomMenu()
 			data.current.value == 'recruit_wear' or
 			data.current.value == 'officer_wear' or
 			data.current.value == 'sergeant_wear' or
-			data.current.value == 'intendent_wear' or
+			--data.current.value == 'intendent_wear' or
 			data.current.value == 'lieutenant_wear' or
 			data.current.value == 'chef_wear' or
 			data.current.value == 'boss_wear' or
 			data.current.value == 'bullet_wear' or
-			data.current.value == 'tenu_ma' or
-			data.current.value == 'tenu_hiv' or
+			data.current.value == 'tenu_mo' or
+			data.current.value == 'tenu_k9' or
 			data.current.value == 'tenu_swat' or
 			data.current.value == 'tenu_swatgr' or
-			data.current.value == 'tenu_doag' or
+			--data.current.value == 'tenu_doag' or
 			data.current.value == 'tenu_lspd' or
-			data.current.value == 'tenu_sahp' or
-			data.current.value == 'tenu_sahpg'
+			--data.current.value == 'tenu_sahp' or
+			--data.current.value == 'tenu_sahpg'
 		then
 			setUniform(data.current.value, playerPed)
 		end
@@ -682,8 +670,8 @@ function OpenPoliceActionsMenu()
 			{label = '<span style="color:#00cc00;">🚑 Menu EMS <span style="color:cyan;"> >', value = 'ems'},			
 			{label = '<span style="color:#669999;">🔨 Menu Objets <span style="color:cyan;"> >', value = 'object_spawner'},
 			{label = '<span style="color:#109999;">🔰 Menu Boucliers <span style="color:cyan;"> >', value = 'boucliermenu'},				
-			{label = '<span style="color:#66ff00;">🔰 Sortir Bouclier<span style="color:cyan;"> >', value = 'spawn_bouclier'},
-			{label = '<span style="color:#61ff90;">◀️ Ranger Bouclier<span style="color:cyan;"> >', value = 'remove_bouclier'},
+			--{label = '<span style="color:#66ff00;">🔰 Sortir Bouclier<span style="color:cyan;"> >', value = 'spawn_bouclier'},
+			--{label = '<span style="color:#61ff90;">◀️ Ranger Bouclier<span style="color:cyan;"> >', value = 'remove_bouclier'},
 			{label = '<span style="color:#ffc850;">📟 Radar Mobile<span style="color:cyan;"> >', value = 'rd_mobile'}			
 			
 	}}, function(data, menu)
