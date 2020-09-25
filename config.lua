@@ -13,35 +13,17 @@ Config.EnableLicenses             = true -- enable if you're using esx_license
 
 Config.EnableHandcuffTimer        = true -- enable handcuff timer? will unrestrain player after the time ends
 Config.HandcuffTimer              = 10 * 60000 -- 10 mins
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
 Config.EnableJobBlip              = true -- enable blips for colleagues, requires esx_society
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
+
 Config.MaxInService               = -1
 Config.Locale = 'fr'
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
--- Vehicles list: https://wiki.gtanet.work/index.php?title=Vehicle_Models
-config	= {}
-config.vehicle1 = 'police2'
-config.vehicle2 = 'police3'
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
--- Ped model list: https://forums.gta5-mods.com/topic/7789/npc-or-peds-data-list-base-gtav
-config.ped1 = 's_f_y_cop_01' -- model of security personel
-config.ped2 = 's_m_y_cop_01' -- model of security personel
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
--- Set weapons: https://forum.fivem.net/t/list-of-weapon-spawn-names-after-hours/90750
-config.weapon1 = 'WEAPON_MICROSMG'
-config.weapon2 = 'WEAPON_CARBINERIFLE'
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
+
 -- Set config.usejob = true if you want to use a job
 config.usejob = true  -- restrict to a job?
 config.jobname = 'police' -- which job to use the menu?
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
 Config.WhitelistedCops = {
 	'police'
 }
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
 Config.PoliceStations = {
 
 	LSPD = {
@@ -92,7 +74,7 @@ Config.PoliceStations = {
 	}
 
 }
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
+
 Config.AuthorizedWeapons = {
 	recruit = {
 		{ weapon = 'WEAPON_APPISTOL', components = { 0, 0, 1000, 4000, nil }, price = 1 },
