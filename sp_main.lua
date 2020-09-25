@@ -90,41 +90,29 @@ function setUniform(job, playerPed)
 		end
 	end)
 end
--- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
+--------------------------------------- [Vestiaire by Steve] ----------------------------------------------------- 
+print('[Vestiaire by Steve]')
+print('[V1.0]')
+------
 function OpenCloakroomMenu()
 	local playerPed = PlayerPedId()
 	local grade = PlayerData.job.grade_name
-
-	local elements = {
-		{ label = _U('citizen_wear'), value = 'citizen_wear' },
-		{ label = '--Tenue--'},
-		{ label = 'Tenue Cadet', value = 'recruit_wear' },
-		{ label = 'Tenue LSPD', value = 'officer_wear' },
-		{ label = 'Tenue Sergent', value = 'sergent_wear'},
-		{ label = 'Tenue Lieutenant', value = 'lieutenant_wear'},
-		{ label = 'Tenue Capitaine ', value = 'chef_wear'},
-		{ label = '--Spécial--'},
-		{ label = 'Tenue Commandant', value = 'boss_wear' },
-		{ label = 'Tenue K9', value = 'tenu_k9' },
-		{ label = 'Tenue Motard', value = 'tenu_mo'},
-		{ label = '--Swat--'},
-		{ label = 'Tenue Swat 1', value = 'tenu_swat' },
-		{ label = 'Tenue Swat 2', value = 'tenu_swatgr' },
-		{ label = '--Gilet Pare Balles--' },
-		{ label = _U('bullet_wear'), value = 'bullet_wear' },
-	  }
-
-
 	ESX.UI.Menu.CloseAll()
 
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom', {
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_wear', {
 		css      = 'police',
-		title    = _U('cloakroom'),
+		title    = 'Police',
 		align    = 'top-left',
-		elements = elements
-	}, function(data, menu)
+		elements = {			
+		  { label = _U('citizen_wear'), value = 'citizen_wear' },
+		  { label = '<span style="color:blue;">👮 Tenue Agent 👮 <span style="color:cyan;"> ▶️ ', value = 'agent'},
+		  { label = '<span style="color:yellow;">🔒 Tenue Spécial 🔒 <span style="color:cyan;"> ▶️ ', value = 'sp'},
+		  { label = '<span style="color:Gray;">🚨 Swat 🚨 <span style="color:cyan;"> ▶️ ', value = 'swat'},
+		  { label = '<span style="color:Orange;">🦺 Gilet Pare Balles 🦺 <span style="color:cyan;"> ▶️ ', value = 'pb'},		
+			
+	}}, function(data, menu)
 		cleanPlayer(playerPed)
-
+		 
 		if data.current.value == 'citizen_wear' then
 			if Config.EnableNonFreemodePeds then
 				ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
@@ -173,96 +161,106 @@ function OpenCloakroomMenu()
 					end
 				end, 'police')
 			end
+			---Si choix Agent go ici -----------------------------------------------
+		elseif data.current.value == 'agent' then 
+		  local elements = {
+			  { label = '👮‍ Tenue Cadet', value = 'recruit_wear'},
+			  { label = '👮‍ Tenue LSPD', value = 'officer_wear' },
+			  { label = '👮‍ Tenue Sergent', value = 'sergent_wear'},
+			  { label = '👮‍ Tenue Lieutenant', value = 'lieutenant_wear'},
+			  { label = '👮‍ Tenue Capitaine ', value = 'chef_wear'}
+		  }
+
+		  ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_lspd', {
+			  css      = 'police',
+			  title    = _U('citizen_lspd'),
+			  align    = 'top-left',
+			  elements = elements
+		  }, function(data2, menu2)
+			  if
+					data2.current.value == 'recruit_wear'  or 
+					data2.current.value == 'officer_wear' or
+					data2.current.value == 'sergeant_wear' or
+					data2.current.value == 'lieutenant_wear' or
+				  data2.current.value == 'chef_wear'
+			  then 
+				  setUniform(data2.current.value, playerPed)
+			  end 
+		  end, function(data2, menu2)
+			  menu2.close()
+		  end)
+		  -----------------------------------------------------------------
+		  ---Si choix spécial go ici ---------------------------------------
+		elseif data.current.value == 'sp' then 
+		  local elements = {
+			  { label = '<span style="color:Red;">⭐ Tenue Commandant ', value = 'boss_wear'},
+			  { label = '<span style="color:Brown;">🐶 Tenue K9 ', value = 'tenu_k9'},
+			  { label = '<span style="color:Peach;">🏍️ Tenue Motard' , value = 'tenu_mo'}
+		  }
+
+		  ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_lspd_sp', {
+			  css      = 'police',
+			  title    = _U('citizen_lspd_sp'),
+			  align    = 'top-left',
+			  elements = elements
+		  }, function(data2, menu2)
+			  if
+					data2.current.value == 'boss_wear' or
+				  data2.current.value == 'tenue_k9' or 
+				  data2.current.value ==  'tenu_mo' 
+			  then 
+				  setUniform(data2.current.value, playerPed)
+			  end
+		  end, function(data2, menu2)
+			  menu2.close()
+		  end)
+		  -----------------------------------------------------------------
+		  ---Si choix swat go ici -----------------------------------------
+		elseif data.current.value == 'swat' then 
+		  local elements = {
+			  { label = '<span style="color:Jade;">⚡ Tenue Swat 1 ', value = 'tenu_swat'},
+			  { label = '<span style="color:Jade;">⚡ Tenue Swat 2 ', value = 'tenu_swatgr'}
+		  }
+
+		  ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_lspd_swat', {
+			  css      = 'police',
+			  title    = _U('citizen_lspd_swat'),
+			  align    = 'top-left',
+			  elements = elements
+		  }, function(data2, menu2)
+			  if
+					data2.current.value == 'tenu_swat' or
+				  data2.current.value == 'tenu_swatgr' 
+			  then 
+				  setUniform(data2.current.value, playerPed)
+			  end
+		  end, function(data2, menu2)
+			  menu2.close()
+		  end)
+		  ---------------------------------------------------------------
+		  ---Si choix pare balle go ici ---------------------------------
+	  elseif data.current.value == 'pb' then 
+		  local elements = {
+			  { label = ('🦺 Gilet'), value = 'bullet_wear' },
+		  }
+
+		  ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'bullet_wear', {
+			  css      = 'police',
+			  title    = _U('bullet_wear'),
+			  align    = 'top-left',
+			  elements = elements
+		  }, function(data2, menu2)
+			  if
+					data2.current.value == 'bullet_wear' 
+			  then 
+				  setUniform(data2.current.value, playerPed)
+			  end
+		  end, function(data2, menu2)
+			  menu2.close()
+		  end)
+		  ------------------------------------------------------------------
 		end
-
-		if Config.MaxInService ~= -1 and data.current.value ~= 'citizen_wear' then
-			local serviceOk = 'waiting'
-
-			ESX.TriggerServerCallback('esx_service:isInService', function(isInService)
-				if not isInService then
-
-					ESX.TriggerServerCallback('esx_service:enableService', function(canTakeService, maxInService, inServiceCount)
-						if not canTakeService then
-							ESX.ShowNotification(_U('service_max', inServiceCount, maxInService))
-						else
-							serviceOk = true
-							playerInService = true				
-
-							local notification = {
-								title    = _U('service_anonunce'),
-								subject  = '',
-								msg      = _U('service_in_announce', GetPlayerName(PlayerId())),
-								iconType = 1
-							}
-
-							TriggerServerEvent('esx_service:notifyAllInService', notification, 'police')
-							TriggerEvent('sp_police:updateBlip')
-							ESX.ShowNotification(_U('service_in'))
-						end
-					end, 'police')
-
-				else
-					serviceOk = true
-				end
-			end, 'police')
-
-			while type(serviceOk) == 'string' do
-				Citizen.Wait(5)
-			end
-
-			-- if we couldn't enter service don't let the player get changed
-			if not serviceOk then
-				return
-			end
-		end
-
-		if
-			data.current.value == 'recruit_wear' or
-			data.current.value == 'officer_wear' or
-			data.current.value == 'sergeant_wear' or
-			--data.current.value == 'intendent_wear' or
-			data.current.value == 'lieutenant_wear' or
-			data.current.value == 'chef_wear' or
-			data.current.value == 'boss_wear' or
-			data.current.value == 'bullet_wear' or
-			data.current.value == 'tenu_mo' or
-			data.current.value == 'tenu_k9' or
-			data.current.value == 'tenu_swat' or
-			data.current.value == 'tenu_swatgr' or
-			--data.current.value == 'tenu_doag' or
-			data.current.value == 'tenu_lspd' or
-			--data.current.value == 'tenu_sahp' or
-			--data.current.value == 'tenu_sahpg'
-		then
-			setUniform(data.current.value, playerPed)
-		end
-
-		if data.current.value == 'freemode_ped' then
-			local modelHash = ''
-
-			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-				if skin.sex == 0 then
-					modelHash = GetHashKey(data.current.maleModel)
-				else
-					modelHash = GetHashKey(data.current.femaleModel)
-				end
-
-				ESX.Streaming.RequestModel(modelHash, function()
-					SetPlayerModel(PlayerId(), modelHash)
-					SetModelAsNoLongerNeeded(modelHash)
-
-					TriggerEvent('esx:restoreLoadout')
-				end)
-			end)
-		end
-	end, function(data, menu)
-		menu.close()
-
-		CurrentAction     = 'menu_cloakroom'
-		CurrentActionMsg  = _U('open_cloackroom')
-		CurrentActionData = {}
-	end)
-end
+		-------------------[fin]-----------------------------------------------------------------------------
 -- SP © License | Discord : https://discord.gg/39mJqPU / https://discord.gg/3wwzfmf
 function OpenArmoryMenu(station)
 local elements = {
